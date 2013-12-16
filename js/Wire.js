@@ -18,7 +18,8 @@ Game.Wire = function(myX, myY, myType, tRotation, tCanRotate, light) {
 	"zPlug" : [1,0,1,0],
 	"cross" : [1,1,1,1],
 	"tcord" : [1,1,1,0],
-	"kitty" : [0,0,0,0]
+	"kitty" : [0,0,0,0],
+	"empty" : [0,0,0,0]
 	}[myType], i, on = false, wallCode;
 
 	my.light = light;
@@ -94,12 +95,11 @@ Game.Wire = function(myX, myY, myType, tRotation, tCanRotate, light) {
 	my.lightUp = function() {
 		noToReturn = 0;
 		if(my.type === 'zPlug'){
-			//Game.checkAllLights();
 			noToReturn +=1;
 		}
 		
 		on = true;
-		if (light) {
+		if (light) { //If this tile has a light...
 			light.turnOn();
 			noToReturn += 1;
 		}
