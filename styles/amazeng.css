@@ -13,24 +13,21 @@ ol, ul {
 
 header, footer, nav, section, article, hgroup, figure {
   display: block; }
+
 html {
 	font-family: 'Gorditas';
 	width:390px;
 	margin:auto;
-	background-image:url('http://wallfoy.com/wp-content/uploads/2013/11/Snow-Wallpaper-11.jpg') ;
+	background-image: url('http://www.vectorfree.com/media/vectors/pine-trees-snow.jpg');
 }
-#canvas-container {
-	width:390px;
-	margin:0px;
-}
+
 #game-container {
 	width: 390px;
 }
-#stage{
-	margin:auto;
-}
+
 canvas {
-	background-color: green;
+	background-image: url('http://fc01.deviantart.net/fs30/f/2008/148/c/3/Wood_floor_by_gnrbishop.jpg');
+	margin:auto;
 }
 footer {
 	font-size:80%;

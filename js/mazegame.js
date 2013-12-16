@@ -10,7 +10,13 @@ var Game = {
         "plug" : "img/plug.png",
         "tcord" : "img/tcord.png",
         "kitty" : "img/catSleep.png",
-        "empty": "img/straight.png"
+        "empty": "",
+        "R" : "img/red.png",
+        "O" : "img/orange.png",
+        "Y" : "img/yellow.png",
+        "G" : "img/green.png",
+        "B" : "img/blue.png",
+        "V" : "img/purple.png"
     },
     // to avoid redundancy, we refer to property identifiers in imgResSrcs here
     tileSrcs : ["straight", "cross", "tcord", "corner", "plug", "kitty", "empty"],
@@ -26,7 +32,7 @@ var Game = {
 
     levelIsWon : false,
     offsetX : 10,
-    offsetY : 10,
+    offsetY : 50,
     currentLevel : 0,
     minimumCows : 1,
     cowsCollected : 0,
@@ -62,35 +68,31 @@ Game.initModel = function () {
     'use strict';
     var theMap = Game.Grid(Game.levels.getMap()), // make a wrapped grid of tile codes
         
-        tiles = [], // will be used to create a grid object containing all the tiles
+        wires = [], // will be used to create a grid object containing all the tiles
         
-        type, tile, tname, tBitmap, tkey, rkey, tRotation, tCanRotate;
+        type, wire, tname, tBitmap, tkey, Lkey, tRotation, tCanRotate;
     
-    //
-    // get the minimum cows for this level
-    //Game.minimumCows = Game.levels.getMinimumCows();
-	//Game.cowsCollected = 0;
+	 
+	 Game.lights = [];
     
     // convert 2d array of tile codes into a 2d array of tile objects...
     
     theMap.process(function (tileCode, col, row) {
         //
-        if (col >= tiles.length) {
-            tiles.push([]); // make a new column
+        if (col >= wires.length) {
+            wires.push([]); // make a new column
         }
-
         
         if (typeof tileCode === "string") {    	
-        	tkey = tileCode.charAt(0); // xmas lights
-        	/*
-        	rkey = tileCode.charAt(2);
-        	if (rkey === "R"){ // rotatable
-        		Game.darkCrops.push(new Game.darkCrop(col,row));
-        	}*/
-        	
+        	tkey = tileCode.charAt(0); // wires
         	tname = Game.tileKeys[tkey];
         	type = tname; //Game.imgResSrcs[tname];
         	
+        	Lkey = tileCode.charAt(3);
+        	if ( Lkey != "N"){ // 
+        		Game.lights.push(new Game.Light(col,row,Game.imgResSrcs[Lkey]));
+        	}
+
         	if (tileCode.length > 1) {
         		tRotation = parseInt(tileCode.charAt(1),10);
         		tCanRotate = tileCode.charAt(2);
@@ -99,27 +101,41 @@ Game.initModel = function () {
         } 
         
         // now make the tile
-        tile = new Game.MazeTile(col, row, type, tRotation, tCanRotate);
+        wire = new Game.Wire(col, row, type, tRotation, tCanRotate);
         
         // store the tile in our 2d array of tiles and add it to the stage
-        tiles[row][col] = tile;
-        Game.stage.addChild(tile);
+        wires[row][col] = wire;
+        Game.stage.addChild(wire);
         
     });
     
-    Game.tiles = Game.Grid(tiles); // wrap the tiles array up as a 'grid' object
-    // finally, now that all tiles are drawn, add the objects on top
+    Game.wires = Game.Grid(wires); // wrap the tiles array up as a 'grid' object
     
+    // finally, now that all tiles are drawn, add the objects on top
+    Game.addLights();
+    wires[0][0].lightUp();
 };
 
+Game.checkConnection = function(){
+	row = 0;
+	while (Game.wires.inside(row,0)) {
+		col = 0;
+            while (Game.wires.inside(row,col)) {
+            	Game.wires.get(row, col).lightsOff();
+            	col += 1;
+            }
+            row +=1;
+           }
+    Game.wires.get(0,0).lightUp();
+};
 
 //
 // update all tiles, check if game is won(REDO WIN STATE), then update the stage
 
 Game.update = function () {
     'use strict';
-    Game.tiles.process(function (tile) {
-        tile.update();
+    Game.wires.process(function (tile) {
+        wire.update();
     });
     
     if (Game.levelIsWon) {
