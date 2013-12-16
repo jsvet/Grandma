@@ -13,11 +13,16 @@ Game.Light = function (myX, myY, imgSrc) {
         var newXpx, newYpx;
         my.posX = newX;
         my.posY = newY;
-        my.isVisable = true;
+        my.isTurnedOn = false;
         //
-         // just jump to the correct position
-          	my.x = my.posX * Game.gridSize + Game.offsetX + my.regX;
-            my.y = my.posY * Game.gridSize + Game.offsetY + my.regY;     
+        // just jump to the correct position
+        
+        my.regX = Game.gridSize / 2;
+		my.regY = Game.gridSize / 2;
+       
+        my.x = my.posX * Game.gridSize + Game.offsetX + my.regX;
+        my.y = my.posY * Game.gridSize + Game.offsetY + my.regY;     
+        
         Game.stage.update();
     };
     
@@ -25,7 +30,25 @@ Game.Light = function (myX, myY, imgSrc) {
     my.isAt = function(somewhereX, somewhereY){
         return my.posX === somewhereX && my.posY === somewhereY && my.isVisable;
     };
+    
+    my.returnIsTurnedOn = function(){
+    	return my.isTurnedOn;
+    };
+    
+    my.turnOn = function(){
+    	console.log(my.posY);
+    	console.log("i was turned on");
+    	my.isTurnedOn = true;
+    };
 
+    my.turnOff = function(){
+    	console.log("i was turned off");
+    	my.isTurnedOn = false;
+    };
+    
+    my.rotate = function(degrees){
+    	my.rotation = degrees;
+    };
     
     my.setLightPosition(myX, myY);
     return my;
