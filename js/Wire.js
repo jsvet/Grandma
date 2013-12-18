@@ -152,7 +152,6 @@ Game.Wire = function(myX, myY, myType, tRotation, tCanRotate, light) {
 		noToReturn = 0;
 		var doesWireContinue = my.doesWireContinue(dirX, dirY);
 		if (doesWireContinue && !on) {
-			console.log("tryToLightUp");
 			noToReturn = my.lightUp();
 		}
 		return noToReturn;

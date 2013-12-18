@@ -23,8 +23,6 @@ Game.Light = function(myX, myY, myType) {'use strict';
 
 		my.x = my.posX * Game.gridSize + Game.offsetX + my.regX;
 		my.y = my.posY * Game.gridSize + Game.offsetY + my.regY;
-
-		Game.stage.update();
 	};
 
 	//
@@ -69,7 +67,6 @@ Game.addLights = function() {
 	var lightIndex;
 	for (lightIndex in Game.lights) {
 		Game.stage.addChild(Game.lights[lightIndex]);
-		console.log("hej");
 	}
 };
 

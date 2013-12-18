@@ -10,7 +10,9 @@ var Game = {
 		"aPlug" : "img/plug.png",
 		"zPlug" : "img/plug.png",
 		"tcord" : "img/tcord.png",
-		"kitty" : "img/catSleep.png",
+		"catSleep" : "img/catSleep.png",
+		"catAwake" : "img/catAwake.png",
+		"catStands" : "img/catStands.png",
 		"empty" : "img/empty.png",
 		"R" : "img/redOff.png",
 		"O" : "img/orangeOff.png",
@@ -26,7 +28,10 @@ var Game = {
 		"bon" : "img/LTblueOn.png",
 		"Bon" : "img/blueOn.png",
 		"Von" : "img/purpleOn.png",
-		"electric" : "img/electric.png"
+		"electric" : "img/electric.png",
+		"sun" : "img/sun.png",
+		"soundOn" : "img/sound.png",
+		"soundOff" : "img/noSound.png"
 	},
 	// to avoid redundancy, we refer to property identifiers in imgResSrcs here
 	tileSrcs : ["straight", "cross", "tcord", "corner", "plug", "kitty", "empty"],
@@ -37,16 +42,19 @@ var Game = {
 		"C" : "corner",
 		"A" : "aPlug",
 		"Z" : "zPlug",
-		"K" : "kitty",
 		"E" : "empty"
 	},
 
 	levelIsWon : false,
-	offsetX : 0,
+	offsetX : 10,
 	offsetY : 50,
 	currentLevel : 0,
 	minimumCows : 1,
 	cowsCollected : 0,
+	timeBeforeCatsShows: 15 * 1000, //20 seconds befor cat shows up
+	timeBetweenCatStages: 10 * 1000, //10 sencods between chat stage changes
+	timeToCompleatLevel: 60 * 1000,
+	isSoundOn: true,
 
 	// music
 	//weWishYou : createjs.Sound.registerSound("sound/wewishyou.mp3", "weWishYou", 1),
@@ -66,21 +74,29 @@ var Game = {
 Game.init = function() {'use strict';
 	createjs.Ticker.addEventListener("tick", Game.stage);
 	//Game.initModel();
+	Game.stage.removeAllChildren();
 	Game.setupInput();
 	Game.showStartScreen();
 };
+
+Game.setSoundButton = function(){
+		var soundButton = new Game.SoundButton(Game.isSoundOn);
+	Game.stage.addChild(soundButton);
+}
 
 //
 // this is called at start of each level
 Game.initModel = function() {'use strict';
 	var theMap = Game.Grid(Game.levels.getMap()), // make a wrapped grid of tile codes
-
 	wires = [], // will be used to create a grid object containing all the tiles
-
 	type, wire, tname, tBitmap, tkey, Lkey, tRotation, tCanRotate;
 
+	Game.cat;
+	Game.timer;
 	Game.lights = [];
 
+	//Show Background image
+	Game.showGameBackground();
 	// convert 2d array of tile codes into a 2d array of tile objects...
 
 	theMap.process(function(tileCode, col, row) {
@@ -93,6 +109,11 @@ Game.initModel = function() {'use strict';
 
 		if ( typeof tileCode === "string") {
 			tkey = tileCode.charAt(0);
+			//Cat
+			if(tkey === 'K'){
+				Game.cat = new Game.Cat(col, row);
+				Game.stage.addChild(Game.cat);
+			}
 			// wires
 			tname = Game.tileKeys[tkey];
 			type = tname;
@@ -126,11 +147,19 @@ Game.initModel = function() {'use strict';
 	// finally, now that all tiles are drawn, add the objects on top
 	Game.addLights();
 	wires[0][0].lightUp();
+	Game.timer = new Game.Timer();
+	Game.stage.addChild(Game.timer);
 };
 
-//
-// update all tiles, check if game is won(REDO WIN STATE), then update the stage
+Game.cleanUpGameTimers = function(){
+	//Clean cat timer 
+	Game.cat.stopCatTimer();
 
+	//Stop time timer
+	Game.timer.stopTimer();
+}
+
+// update all tiles, check if game is won(REDO WIN STATE), then update the stage
 Game.update = function() {'use strict';
 	Game.wires.process(function(wire) {
 		wire.lightsOff();
@@ -144,6 +173,8 @@ Game.update = function() {'use strict';
 	}
 
 	if (Game.levelIsWon) {
+		//StopTimes when won
+		Game.cleanUpGameTimers();		
 		window.setTimeout(function() {
 			Game.showLevelOver();
 			Game.levelIsWon = false;
