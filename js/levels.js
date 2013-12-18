@@ -18,7 +18,8 @@ Game.levels = [
 			["S3RN","T2RN","S3RN","S2RG","C2RN","T2RN","C2RN"],
 			["S0RN","S1RB","S1RN","S1RN","S1RN","S1RN","S2RN"],
 			["S0RN","S1RB","S1RN","S1RN","S1RN","S1RN","S2RN"],
-			["K0NN","S1NN","S1NN","S1NN","S1NN","S1NN","Z2NN"]
+            ["S0RN","S1RB","S1RN","S1RN","S1RN","S1RN","S2RN"],
+			["K0RN","S1RN","S1RN","S1RN","S1RN","S1RN","Z2NN"]
 
 		]
     },

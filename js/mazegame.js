@@ -55,16 +55,19 @@ var Game = {
 	isSoundOn: true,
 
 	// music
-	//weWishYou : createjs.Sound.registerSound("sound/wewishyou.mp3", "weWishYou", 1),
+	weWishYou : createjs.Sound.registerSound("sound/weWishYou.mp3", "weWishYou", 1),
+	scratch : createjs.Sound.registerSound("sound/scratch.mp3", "scratch", 1),
+	record : createjs.Sound.registerSound("sound/record.mp3", "record", 1),
 	//door : createjs.Sound.registerSound("sound/door.mp3", "door", 1),
-	jazzbg : createjs.Sound.registerSound("sound/jazzbg.mp3", "jazzbg", 1),
+	jazzbg : createjs.Sound.registerSound("sound/jazz.mp3", "jazzbg", 1),
 	tile : createjs.Sound.registerSound("sound/tile.mp3", "tile", 1),
 	buzz : createjs.Sound.registerSound("sound/buzz.mp3", "buzz", 1),
 	//timer : createjs.Sound.registerSound("sound/timer.mp3", "timer", 1),
-	//meow : createjs.Sound.registerSound("sound/meow.mp3", "meow", 1),
+	meow : createjs.Sound.registerSound("sound/meow.mp3", "meow", 1),
 	//purr : createjs.Sound.registerSound("sound/purr.mp3", "purr", 1),
 	//winLevel : createjs.Sound.registerSound("sound/winLevel.mp3", "winLevel", 1),
-	loseLevel : createjs.Sound.registerSound("sound/loseLevel.mp3", "loseLevel", 1)
+	loseLevel : createjs.Sound.registerSound("sound/loseLevel.mp3", "loseLevel", 1),
+	isJazzPlaying : false
 };
 
 //
@@ -197,6 +200,8 @@ Game.checkAllLights = function() {
 // preloading can't be avoided. Get it out of the way, with the option to run immediately
 Game.preloadAssets = function(runImmediatelyAfterwards) {'use strict';
 	var assetKey, asset, assetList = [];
+	//Give sound alternativ
+	createjs.Sound.alternateExtensions = ["ogg"];
 	//create a LoadQueue object
 	Game.preloader = new createjs.LoadQueue(false);
 	if (runImmediatelyAfterwards) {

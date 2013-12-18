@@ -37,7 +37,7 @@ Game.Cat = function(myX, myY) {'use strict';
 	my.incrementCatStage = function(){
 		//Increment cat stage with one
 		my.catStage += 1;
-
+		createjs.Sound.play("meow");
 		//Check if catStage is === to the lenght of catStages. because catStages starts at 0 to catStages.length-1. 
 		if(my.catStage >= my.catStages.length){
 			//Stop all timers 

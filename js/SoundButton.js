@@ -1,7 +1,7 @@
 /*global createjs, Game*/
 
 Game.SoundButton = function(sounOn) {'use strict';
- 	var myX = 10, myY = 10;
+ 	var myX = 11, myY = 8;
 	var startX = myX, startY = myY;
 
 	var changeInX = 55;

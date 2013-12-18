@@ -68,9 +68,12 @@ Game.showLvgRmWin = function(){
 	//forget about the tiles used for current level
 	Game.tiles = [];
 
-	Game.showStartBtn("img/LvgRmWin.png");
+	var background = Game.showStartBtn("img/LvgRmWin.png");
 	var nextBtn = Game.showNextLevelBtn();
 	nextBtn.addEventListener("mousedown", function() {
+		Game.showLvgRmHappy();
+	});
+	background.addEventListener("mousedown", function() {
 		Game.showLvgRmHappy();
 	});
 };
@@ -120,6 +123,13 @@ Game.showLvgRmHappy = function() {'use strict';
 	//forget about the tiles used for current level
 	Game.tiles = [];
 
+	if(!Game.isJazzPlaying){
+		//createjs.Sound.stop();
+		createjs.Sound.play("jazzbg", {loop:-1});
+		createjs.Sound.play("record", {loop:-1});
+		Game.isJazzPlaying = true;
+	}
+
 	var startBtn = Game.showStartBtn("img/LvgRmHappy.png");
 	startBtn.addEventListener("mousedown", function() {
 		Game.showCalender();
@@ -132,17 +142,25 @@ Game.showLvgRmSad = function() {'use strict';
 	//forget about the tiles used for current level
 	Game.tiles = [];
 
+	createjs.Sound.stop();
+	createjs.Sound.play("scratch");
+
 	var startBtn = Game.showStartBtn("img/LvgRmSad.png");
 	startBtn.addEventListener("mousedown", function() {
 		Game.showLvgRmHappy();
 	});
+	//Set timer
+	window.setTimeout(function() {
+		Game.showLvgRmHappy();
+	}, 2000);
 };
 
 Game.showStartScreen = function() {'use strict';
 	Game.stage.removeAllChildren();
-
 	//forget about the tiles used for current level
 	Game.tiles = [];
+
+	createjs.Sound.play("weWishYou");
 
 	var startBtn = Game.showStartBtn("img/GameSign.png");
 	startBtn.addEventListener("mousedown", function() {
@@ -154,6 +172,7 @@ Game.showStartScreen = function() {'use strict';
 Game.showCatLose = function() {'use strict';
 
 	var nextBtn = Game.showStartBtn("img/LoseCat.png");
+	createjs.Sound.play("meow");
 	nextBtn.addEventListener("mousedown", function() {
 		Game.showLvgRmHappy();
 	});
