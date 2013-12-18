@@ -11,11 +11,7 @@ Game.Grid = function (array2d) {
         return ((row >= 0) && (row < grid.length) && (col >= 0) && (col < grid[row].length));
     };
     //
-    // return an item from a specific cell in the grid
-    
-    my.get = function (col, row) {
-        return grid[row][col];
-    };
+
     //
     // apply any function to all the items in the grid
     

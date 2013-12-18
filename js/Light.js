@@ -25,11 +25,6 @@ Game.Light = function(myX, myY, myType) {'use strict';
 		my.y = my.posY * Game.gridSize + Game.offsetY + my.regY;
 	};
 
-	//
-	my.isAt = function(somewhereX, somewhereY) {
-		return my.posX === somewhereX && my.posY === somewhereY && my.isVisable;
-	};
-
 	my.returnIsTurnedOn = function() {
 		return my.isTurnedOn;
 	};

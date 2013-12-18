@@ -105,7 +105,7 @@ Game.Wire = function(myX, myY, myType, tRotation, tCanRotate, light) {
 			noToReturn += 1;
 		}
 		else{
-			my.electric = Game.Electric(my.posX, my.posY);
+			my.electric = new Game.Electric(my.posX, my.posY);
 			Game.stage.addChild(my.electric);
 		}
 		

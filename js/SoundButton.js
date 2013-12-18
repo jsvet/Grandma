@@ -47,7 +47,7 @@ Game.SoundButton = function(sounOn) {'use strict';
 		}
 		//Chage image
 		my.image.src = imgSrc;
-	}
+	};
 
 	my.addEventListener("mousedown", function() {
 		my.toggleSound();

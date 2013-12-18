@@ -28,9 +28,10 @@ Game.Timer = function() {'use strict';
 			.call(function(){
 				Game.cleanUpGameTimers();
 				Game.showTimeLost();
+				createjs.Sound.play("loseLevel");
 			})
 			;
-	}
+	};
 
 	my.animateMoveToFirsHalf = function(){
 		var newX = my.x + changeInX;
@@ -38,11 +39,11 @@ Game.Timer = function() {'use strict';
 		createjs.Tween.get(my)
 			.to({x:newX,y:newY},Game.timeToCompleatLevel/2,createjs.Ease.linear)
 			.call(function(){my.animateMoveToSecondHalf();});
-	}
+	};
 
 	my.stopTimer = function(){
 		createjs.Tween.removeTweens(my);
-	}
+	};
 
 	//Set the Timer position, for createJS
 	my.setTimerPosition(myX, myY);

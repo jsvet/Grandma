@@ -44,22 +44,24 @@ Game.Cat = function(myX, myY) {'use strict';
 			Game.cleanUpGameTimers();
 			//LOST
 			Game.showCatLose();
+			//Play lost sound
+			createjs.Sound.play("loseLevel");
 		}
 		else{
 			my.changeTo(my.catStages[my.catStage]);
 		}
-	}
+	};
 
 	my.catShowsUp = function(){
 		catStageTimer = setInterval(function(){
 			my.incrementCatStage();
 		},Game.timeBetweenCatStages);
-	}
+	};
 
 	my.stopCatTimer = function(){
 		window.clearTimeout(catStageTimer);
 		window.clearTimeout(catStageIniTimer);
-	}
+	};
 
 		//Reset cat when you pet it
 	my.addEventListener("mousedown", function() {

@@ -49,8 +49,6 @@ var Game = {
 	offsetX : 10,
 	offsetY : 50,
 	currentLevel : 0,
-	minimumCows : 1,
-	cowsCollected : 0,
 	timeBeforeCatsShows: 15 * 1000, //20 seconds befor cat shows up
 	timeBetweenCatStages: 10 * 1000, //10 sencods between chat stage changes
 	timeToCompleatLevel: 60 * 1000,
@@ -59,7 +57,7 @@ var Game = {
 	// music
 	//weWishYou : createjs.Sound.registerSound("sound/wewishyou.mp3", "weWishYou", 1),
 	//door : createjs.Sound.registerSound("sound/door.mp3", "door", 1),
-	//jazzbg : createjs.Sound.registerSound("sound/jazzbg.mp3", "jazzbg", 1),
+	jazzbg : createjs.Sound.registerSound("sound/jazzbg.mp3", "jazzbg", 1),
 	tile : createjs.Sound.registerSound("sound/tile.mp3", "tile", 1),
 	buzz : createjs.Sound.registerSound("sound/buzz.mp3", "buzz", 1),
 	//timer : createjs.Sound.registerSound("sound/timer.mp3", "timer", 1),
@@ -73,16 +71,14 @@ var Game = {
 // this is called ONCE at start of game
 Game.init = function() {'use strict';
 	createjs.Ticker.addEventListener("tick", Game.stage);
-	//Game.initModel();
 	Game.stage.removeAllChildren();
-	Game.setupInput();
 	Game.showStartScreen();
 };
 
 Game.setSoundButton = function(){
-		var soundButton = new Game.SoundButton(Game.isSoundOn);
+	var soundButton = new Game.SoundButton(Game.isSoundOn);
 	Game.stage.addChild(soundButton);
-}
+};
 
 //
 // this is called at start of each level
@@ -157,7 +153,7 @@ Game.cleanUpGameTimers = function(){
 
 	//Stop time timer
 	Game.timer.stopTimer();
-}
+};
 
 // update all tiles, check if game is won(REDO WIN STATE), then update the stage
 Game.update = function() {'use strict';
@@ -174,7 +170,8 @@ Game.update = function() {'use strict';
 
 	if (Game.levelIsWon) {
 		//StopTimes when won
-		Game.cleanUpGameTimers();		
+		Game.cleanUpGameTimers();
+		createjs.Sound.play("buzz");		
 		window.setTimeout(function() {
 			Game.showLevelOver();
 			Game.levelIsWon = false;
