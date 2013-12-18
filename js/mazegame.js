@@ -19,6 +19,13 @@ var Game = {
 		"b" : "img/LTblueOff.png",
 		"B" : "img/blueOff.png",
 		"V" : "img/purpleOff.png",
+		"Ron" : "img/redOn.png",
+		"Oon" : "img/orangeOn.png",
+		"Yon" : "img/yellowOn.png",
+		"Gon" : "img/greenOn.png",
+		"bon" : "img/LTblueOn.png",
+		"Bon" : "img/blueOn.png",
+		"Von" : "img/purpleOn.png",
 		"electric" : "img/electric.png"
 	},
 	// to avoid redundancy, we refer to property identifiers in imgResSrcs here
@@ -93,7 +100,7 @@ Game.initModel = function() {'use strict';
 
 			Lkey = tileCode.charAt(3);
 			if (Lkey != "N") {//
-				light = new Game.Light(col, row, Game.imgResSrcs[Lkey]);
+				light = new Game.Light(col, row, Lkey);
 				Game.lights.push(light);
 			}
 
