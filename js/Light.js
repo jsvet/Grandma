@@ -50,6 +50,11 @@ Game.Light = function (myX, myY, imgSrc) {
     	my.rotation = degrees;
     };
     
+    //listen for click and alert the wire
+    my.addEventListener("mousedown", function() {
+		Game.wires.get(my.posX, my.posY).rotateOnTap();
+	});
+    
     my.setLightPosition(myX, myY);
     return my;
 };

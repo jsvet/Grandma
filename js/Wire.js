@@ -17,7 +17,7 @@ Game.Wire = function(myX, myY, myType, tRotation, tCanRotate, light) {
 	"aPlug" : [1,0,1,0],
 	"zPlug" : [1,0,1,0],
 	"cross" : [1,1,1,1],
-	"tcord" : [1,1,1,0],
+	"tcord" : [0,1,1,1],
 	"kitty" : [0,0,0,0],
 	"empty" : [0,0,0,0]
 	}[myType], i, on = false, wallCode;
@@ -31,6 +31,7 @@ Game.Wire = function(myX, myY, myType, tRotation, tCanRotate, light) {
 	my.y = my.posY * Game.gridSize + Game.offsetY + my.regY;
 	//
 
+	my.electric = null;
 	// set up touch event listeners
 
 	var rotate = function() {
@@ -103,6 +104,11 @@ Game.Wire = function(myX, myY, myType, tRotation, tCanRotate, light) {
 			light.turnOn();
 			noToReturn += 1;
 		}
+		else{
+			my.electric = Game.Electric(my.posX, my.posY);
+			Game.stage.addChild(my.electric);
+		}
+		
 		var outWireDirections = getOutgoingWires();
 		for (outIndex in outWireDirections) {
 			dirX = outWireDirections[outIndex]['X'];
@@ -121,6 +127,10 @@ Game.Wire = function(myX, myY, myType, tRotation, tCanRotate, light) {
 		on = false;
 		if (light) {
 			light.turnOff();
+		}
+		if(my.electric){
+			Game.stage.removeChild(my.electric);
+			my.electric = null;
 		}
 	};
 

@@ -11,13 +11,15 @@ var Game = {
 		"zPlug" : "img/plug.png",
 		"tcord" : "img/tcord.png",
 		"kitty" : "img/catSleep.png",
-		"empty" : "",
-		"R" : "img/red.png",
-		"O" : "img/orange.png",
-		"Y" : "img/yellow.png",
-		"G" : "img/green.png",
-		"B" : "img/blue.png",
-		"V" : "img/purple.png"
+		"empty" : "img/empty.png",
+		"R" : "img/redOff.png",
+		"O" : "img/orangeOff.png",
+		"Y" : "img/yellowOff.png",
+		"G" : "img/greenOff.png",
+		"b" : "img/LTblueOff.png",
+		"B" : "img/blueOff.png",
+		"V" : "img/purpleOff.png",
+		"electric" : "img/electric.png"
 	},
 	// to avoid redundancy, we refer to property identifiers in imgResSrcs here
 	tileSrcs : ["straight", "cross", "tcord", "corner", "plug", "kitty", "empty"],
@@ -33,7 +35,7 @@ var Game = {
 	},
 
 	levelIsWon : false,
-	offsetX : 10,
+	offsetX : 0,
 	offsetY : 50,
 	currentLevel : 0,
 	minimumCows : 1,
