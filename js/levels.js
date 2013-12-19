@@ -11,42 +11,44 @@ Game.levels = [
     {
         minimumCows : 0,
         grid : [
-        	["A0NN","S0NN","S0NN","S0NN","S0NN","S0NN","E0NN"],
-			["C0RN","S1RN","C2RR","S2RN","S2RN","S0NN","X2RN"],
-			["T3NN","S2RN","T2RN","C2RN","S2RN","S2RN","S2RN"],
-			["X3NN","X2RV","S3RN","X2RN","T2RN","X2RN","X2RN"],
-			["S3RN","T2RN","S3RN","S2RG","C2RN","T2RN","C2RN"],
-			["S0RN","S1RB","S1RN","S1RN","S1RN","S1RN","S2RN"],
-			["S0RN","S1RB","S1RN","S1RN","S1RN","S1RN","S2RN"],
-            ["S0RN","S1RB","S1RN","S1RN","S1RN","S1RN","S2RN"],
-			["K0RN","S1RN","S1RN","S1RN","S1RN","S1RN","Z2NN"]
+        	["A0NN","E0NN","E0NN","E0NN","E0NN","E0NN","C2NN"],
+			["C2RN","S0RN","C2RN","S1RN","C1RN","S1RG","E0NN"],
+			["C3RN","S0RO","T2RN","S1RN","X0NN","S1RR","C2RN"],
+			["S1RN","E0NN","E0NN","S0RY","C3RN","C2RN","C3RN"],
+			["S1RN","E0NN","E0NN","T3RN","C1RN","C2RN","E0NN"],
+			["T1RN","S1RB","S1RN","X0NN","C3RN","S0Rb","C2RN"],
+			["T0RN","S1RN","S1RN","S1RG","E0NN","X0NN","C3RN"],
+            ["C0RR","S0RN","C3RN","S1RN","E0NN","C0RN","C1RN"],
+			["K0NN","E0NN","E0NN","C3RN","T2RN","C3RV","Z2NN"]
 
 		]
     },
     {
     	minimumCows : 8,
     	grid : [
-    	    ["A0NN","S0NN","S0NN","S0NN","S0NN","S0NN","E0NN"],
-			["C0RN","S1RN","C2RR","S2RN","S2RN","S0NN","X2RN"],
-			["T3NN","S2RN","T2RN","C2RN","S2RN","S2RN","S2RN"],
-			["X3NN","X2RV","S3RN","X2RN","T2RN","X2RN","X2RN"],
-			["S3RN","T2RN","S3RN","S2RG","C2RN","T2RN","C2RN"],
-			["S0RN","S1RB","S1RN","S1RN","S1RN","S1RN","S2RN"],
-			["S0RN","S1RB","S1RN","S1RN","S1RN","S1RN","S2RN"],
-			["K0NN","S1NN","S1NN","S1NN","S1NN","S1NN","Z2NN"]
+         	["A0NN","E0NN","E0NN","E0NN","E0NN","E0NN","C2NN"],
+			["C0RN","S1RN","C2RN","S1RN","C1RN","S1RG","E0NN"],
+			["C1RN","S1RO","T2RN","S1RN","X0NN","S1RR","C2RN"],
+			["S0RN","E0NN","E0NN","S0NY","C0RN","C0RN","C3RN"],
+			["S0RN","E0NN","E0NN","T3RN","C1RN","C2RN","E0NN"],
+			["T3RN","S1RB","S1RN","X0NN","C3RN","S0Rb","C2RN"],
+			["T3RN","S1RN","S1RN","S0RG","E0NN","X0NN","C3RN"],
+            ["C0RR","S0RN","C3RN","S1RN","E0NN","C1RN","C1RN"],
+			["K0NN","E0NN","E0NN","C0RN","T2RN","C3RV","Z2NN"]
     	]
    },
    {
     	minimumCows : 9,
     	grid : [
-        	["A0NN","S0NN","S0NN","S0NN","S0NN","S0NN","E0NN"],
-			["C0RN","S1RN","C2RR","S2RN","S2RN","S0NN","X2RN"],
-			["T3NN","S2RN","T2RN","C2RN","S2RN","S2RN","S2RN"],
-			["X3NN","X2RV","S3RN","X2RN","T2RN","X2RN","X2RN"],
-			["S3RN","T2RN","S3RN","S2RG","C2RN","T2RN","C2RN"],
-			["S0RN","S1RB","S1RN","S1RN","S1RN","S1RN","S2RN"],
-			["S0RN","S1RB","S1RN","S1RN","S1RN","S1RN","S2RN"],
-			["K0NN","S1NN","S1NN","S1NN","S1NN","S1NN","Z2NN"]
+         	["A0NN","E0NN","E0NN","E0NN","E0NN","E0NN","C2NN"],
+			["C0RN","S1RN","C2RN","S1RN","C1RN","S1RG","E0NN"],
+			["C1RN","S1RO","T2RN","S1RN","X0NN","S1RR","C2RN"],
+			["S0RN","E0NN","E0NN","S0NY","C0RN","C0RN","C3RN"],
+			["S0RN","E0NN","E0NN","T3RN","C1RN","C2RN","E0NN"],
+			["T3RN","S1RB","S1RN","X0NN","C3RN","S0Rb","C2RN"],
+			["T3RN","S1RN","S1RN","S0RG","E0NN","X0NN","C3RN"],
+            ["C0RR","S0RN","C3RN","S1RN","E0NN","C1RN","C1RN"],
+			["K0NN","E0NN","E0NN","C0RN","T2RN","C3RV","Z2NN"]
     	]
    }
 ];

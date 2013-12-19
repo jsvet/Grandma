@@ -89,9 +89,8 @@ Game.initModel = function() {'use strict';
 	var theMap = Game.Grid(Game.levels.getMap()), // make a wrapped grid of tile codes
 	wires = [], // will be used to create a grid object containing all the tiles
 	type, wire, tname, tBitmap, tkey, Lkey, tRotation, tCanRotate;
-
 	Game.cat;
-	Game.timer;
+	Game.timer = new Game.Timer();
 	Game.lights = [];
 
 	//Show Background image
@@ -116,7 +115,6 @@ Game.initModel = function() {'use strict';
 			// wires
 			tname = Game.tileKeys[tkey];
 			type = tname;
-			//Game.imgResSrcs[tname];
 
 			Lkey = tileCode.charAt(3);
 			if (Lkey != "N") {//
@@ -131,7 +129,7 @@ Game.initModel = function() {'use strict';
 
 		}
 
-		// now make the tile
+		// now make the wire tile
 		wire = new Game.Wire(col, row, type, tRotation, tCanRotate, light);
 
 		// store the tile in our 2d array of tiles and add it to the stage
@@ -140,14 +138,17 @@ Game.initModel = function() {'use strict';
 
 	});
 
-	Game.wires = Game.Grid(wires);
 	// wrap the tiles array up as a 'grid' object
-
+	Game.wires = Game.Grid(wires);
+	
 	// finally, now that all tiles are drawn, add the objects on top
 	Game.addLights();
-	wires[0][0].lightUp();
-	Game.timer = new Game.Timer();
 	Game.stage.addChild(Game.timer);
+	
+	// Start electricity at top plug
+	wires[0][0].lightUp();
+
+
 };
 
 Game.cleanUpGameTimers = function(){
@@ -158,21 +159,21 @@ Game.cleanUpGameTimers = function(){
 	Game.timer.stopTimer();
 };
 
-// update all tiles, check if game is won(REDO WIN STATE), then update the stage
+// update all tiles, check if game is won, then update the stage
 Game.update = function() {'use strict';
 	Game.wires.process(function(wire) {
 		wire.lightsOff();
 	});
-	// In order for the level to work, the start plug must always be placed at (0,0)
+	// In order for the level to work, the start plug must always be placed at (0,0) and must be 'relit' after each change
 	var startPlug = Game.wires.get(0, 0);
 	var noOfTurnedOn = startPlug.lightUp();
-
+	
+	// noOfTurnedOn lights must be larger because the last plug is counted as a light
 	if (noOfTurnedOn > Game.lights.length) {
 		Game.levelIsWon = true;
 	}
 
 	if (Game.levelIsWon) {
-		//StopTimes when won
 		Game.cleanUpGameTimers();
 		createjs.Sound.play("buzz");		
 		window.setTimeout(function() {
@@ -181,19 +182,6 @@ Game.update = function() {'use strict';
 		}, 100);
 		Game.levelIsWon = false;
 	}
-};
-
-//
-// Check All lights when power reaches switch
-Game.checkAllLights = function() {
-	for (lightIndex in Game.lights) {
-		isOn = Game.lights[lightIndex].returnIsTurnedOn();
-		if (!isOn) {
-			return false;
-		}
-	}
-	Game.levelIsWon = true;
-	Game.update();
 };
 
 //

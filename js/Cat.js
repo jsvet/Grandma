@@ -4,7 +4,7 @@ Game.Cat = function(myX, myY) {'use strict';
 	var startX = myX, startY = myY;
 
 	var catStageTimer;
-	var catStageIniTimer;
+	var catStageInitTimer;
 
 	var imgSrc = Game.imgResSrcs['empty'], 
 		my = new createjs.Bitmap(imgSrc);
@@ -60,7 +60,7 @@ Game.Cat = function(myX, myY) {'use strict';
 
 	my.stopCatTimer = function(){
 		window.clearTimeout(catStageTimer);
-		window.clearTimeout(catStageIniTimer);
+		window.clearTimeout(catStageInitTimer);
 	};
 
 		//Reset cat when you pet it
@@ -76,7 +76,7 @@ Game.Cat = function(myX, myY) {'use strict';
 			my.incrementCatStage();
 
 			//Make cat appere again after cooldown
-			catStageIniTimer = window.setTimeout(function(){
+			catStageInitTimer = window.setTimeout(function(){
 				my.catShowsUp();
 			},Game.timeBeforeCatsShows);
 		}
@@ -86,7 +86,7 @@ Game.Cat = function(myX, myY) {'use strict';
 	my.setCatPosition(myX, myY);
 
 	//Make Cat Show up after a given time
-	catStageIniTimer = window.setTimeout(function(){
+	catStageInitTimer = window.setTimeout(function(){
 		my.catShowsUp();
 	},Game.timeBeforeCatsShows);
 

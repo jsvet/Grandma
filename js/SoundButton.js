@@ -19,9 +19,6 @@ Game.SoundButton = function(sounOn) {'use strict';
 		
 	my.SoundOn = sounOn;
 
-	//The differnt cat stages
-
-	//
 	my.setSoundButtonPosition = function(newX, newY) {
 		my.posX = newX;
 		my.posY = newY;
@@ -31,13 +28,16 @@ Game.SoundButton = function(sounOn) {'use strict';
 	};
 
 	my.toggleSound = function(){
-		//Set boolean to opposit
+		//toggle
 		my.SoundOn = !my.SoundOn;
-		//Set global var 
+		
+		//global variable 
 		Game.isSoundOn = my.SoundOn;
-		//Set mute
+		
+		//mute
 		createjs.Sound.setMute(!my.SoundOn);
-		//change image
+		
+		//switch image
 		var imgSrc;
 		if(my.SoundOn){
 			imgSrc = Game.imgResSrcs['soundOn'];
@@ -45,7 +45,7 @@ Game.SoundButton = function(sounOn) {'use strict';
 		else{
 			imgSrc = Game.imgResSrcs['soundOff'];
 		}
-		//Chage image
+		//Change image
 		my.image.src = imgSrc;
 	};
 
