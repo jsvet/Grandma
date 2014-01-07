@@ -31,7 +31,8 @@ var Game = {
 		"electric" : "img/electric.png",
 		"sun" : "img/sun.png",
 		"soundOn" : "img/sound.png",
-		"soundOff" : "img/noSound.png"
+		"soundOff" : "img/noSound.png",
+		"weWishYou" : createjs.Sound.registerSound("sound/weWishYou.mp3", "weWishYou", 1)
 	},
 	// to avoid redundancy, we refer to property identifiers in imgResSrcs here
 	tileSrcs : ["straight", "cross", "tcord", "corner", "plug", "kitty", "empty"],
@@ -49,7 +50,7 @@ var Game = {
 	offsetX : 10,
 	offsetY : 50,
 	currentLevel : 0,
-	timeBeforeCatsShows: 15 * 1000, //20 seconds befor cat shows up
+	timeBeforeCatsShows: 10 * 1000, //10 seconds befor cat shows up
 	timeBetweenCatStages: 10 * 1000, //10 sencods between chat stage changes
 	timeToCompleatLevel: 60 * 1000,
 	isSoundOn: true,

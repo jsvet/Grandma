@@ -49,6 +49,17 @@ Game.Cat = function(myX, myY) {'use strict';
 		}
 		else{
 			my.changeTo(my.catStages[my.catStage]);
+			createjs.Tween.get(my).to({scaleX:1.2,scaleY:1.2,rotation:10},800,createjs.Ease.backInOut)
+			.call(function(){
+				createjs.Tween.get(my).to({scaleX:1.0,scaleY:1.0,rotation:0},1000,createjs.Ease.backInOut)
+				.call(function(){
+					createjs.Tween.get(my).to({scaleX:1.2,scaleY:1.2,rotation:10},800,createjs.Ease.backInOut)
+					.call(function(){
+						createjs.Tween.get(my).to({scaleX:1.0,scaleY:1.0,rotation:0},1000,createjs.Ease.backInOut);
+					});
+				});
+			});
+			
 		}
 	};
 

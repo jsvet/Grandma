@@ -37,6 +37,10 @@ Game.Light = function(myX, myY, myType) {'use strict';
 	my.turnOn = function() {
 		var newLKey = my.type+"on";
 		my.changeTo(newLKey);
+		createjs.Tween.get(my).to({scaleX:1.2,scaleY:1.2},100,createjs.Ease.elasticInOut)
+		.call(function(){
+			createjs.Tween.get(my).to({scaleX:1.0,scaleY:1.0},300,createjs.Ease.elasticInOut);
+		});
 		my.isTurnedOn = true;
 	};
 

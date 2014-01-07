@@ -1,6 +1,7 @@
 /*global Game, createjs, console*/
 // here is the code for buttons, on-screen messages etc.
-Game.showNextLevelBtn = function() {'use strict';
+
+/*Game.showNextLevelBtn = function() {'use strict';
 	var txt = new createjs.Text("HOME", "18px Gorditas", "white"), 
 	hitarea = new createjs.Shape(), 
 	border = 10, 
@@ -23,7 +24,7 @@ Game.showNextLevelBtn = function() {'use strict';
 	Game.stage.update();
 	//
 	return button;
-};
+}; */
 
 Game.showStartBtn = function(imageFile) {'use strict';
 	var txt = new createjs.Text("PLAY", "18px Gorditas", "white"), 
@@ -69,10 +70,10 @@ Game.showLvgRmWin = function(){
 	Game.tiles = [];
 
 	var background = Game.showStartBtn("img/LvgRmWin.png");
-	var nextBtn = Game.showNextLevelBtn();
-	nextBtn.addEventListener("mousedown", function() {
-		Game.showLvgRmHappy();
-	});
+	//var nextBtn = Game.showNextLevelBtn();
+	//nextBtn.addEventListener("mousedown", function() {
+		//Game.showLvgRmHappy();
+	//});
 	background.addEventListener("mousedown", function() {
 		Game.showLvgRmHappy();
 	});
@@ -92,16 +93,53 @@ Game.showLevelOver = function() {'use strict';
 
 };
 
-Game.showStartLevel = function() {'use strict';
-	Game.stage.removeAllChildren();
-
-	//forget about the tiles used for current level
-	Game.tiles = [];
-
-	var startBtn = Game.showStartBtn("img/StartLevel.png");
+Game.showTutScrnProblem = function() {'use strict';
+	var startBtn = Game.showStartBtn("img/tutScrnProblem.png");
 	startBtn.addEventListener("mousedown", function() {
 		Game.stage.removeAllChildren();
 		Game.initModel();
+	});
+};
+
+Game.showTutScrnWhiskers = function() {'use strict';
+	var startBtn = Game.showStartBtn("img/tutScrnWhiskers.png");
+	startBtn.addEventListener("mousedown", function() {
+		Game.showTutScrnProblem();
+	});
+};
+
+Game.showTutScrnFaster = function() {'use strict';
+	var startBtn = Game.showStartBtn("img/tutScrnFaster.png");
+	startBtn.addEventListener("mousedown", function() {
+		Game.showTutScrnWhiskers();
+	});
+};
+
+Game.showTutScrnTime = function() {'use strict';
+	var startBtn = Game.showStartBtn("img/tutScrnTime.png");
+	startBtn.addEventListener("mousedown", function() {
+		Game.showTutScrnFaster();
+	});
+};
+
+Game.showTutScrnConnect = function() {'use strict';
+	var startBtn = Game.showStartBtn("img/tutScrnConnect.png");
+	startBtn.addEventListener("mousedown", function() {
+		Game.showTutScrnTime();
+	});
+};
+
+Game.showTutScrnRotate = function() {'use strict';
+	var startBtn = Game.showStartBtn("img/tutScrnRotate.png");
+	startBtn.addEventListener("mousedown", function() {
+		Game.showTutScrnConnect();
+	});
+};
+
+Game.showStartLevel = function() {'use strict';
+	var startBtn = Game.showStartBtn("img/StartLevel.png");
+	startBtn.addEventListener("mousedown", function() {
+		Game.showTutScrnRotate();
 	});
 };
 
@@ -118,18 +156,6 @@ Game.showCalender = function() {'use strict';
 };
 
 Game.showLvgRmHappy = function() {'use strict';
-	Game.stage.removeAllChildren();
-
-	//forget about the tiles used for current level
-	Game.tiles = [];
-
-	if(!Game.isJazzPlaying){
-		//createjs.Sound.stop();
-		createjs.Sound.play("jazzbg", {loop:-1});
-		createjs.Sound.play("record", {loop:-1});
-		Game.isJazzPlaying = true;
-	}
-
 	var startBtn = Game.showStartBtn("img/LvgRmHappy.png");
 	startBtn.addEventListener("mousedown", function() {
 		Game.showCalender();
@@ -144,15 +170,18 @@ Game.showLvgRmSad = function() {'use strict';
 
 	createjs.Sound.stop();
 	createjs.Sound.play("scratch");
+	if(!Game.isJazzPlaying){
+		//createjs.Sound.stop();
+		createjs.Sound.play("jazzbg", {loop:-1});
+		createjs.Sound.play("record", {loop:-1});
+		Game.isJazzPlaying = true;
+	}
 
 	var startBtn = Game.showStartBtn("img/LvgRmSad.png");
-	startBtn.addEventListener("mousedown", function() {
-		Game.showLvgRmHappy();
-	});
 	//Set timer
 	window.setTimeout(function() {
 		Game.showLvgRmHappy();
-	}, 2000);
+	}, 1500);
 };
 
 Game.showStartScreen = function() {'use strict';
